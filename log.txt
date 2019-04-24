@@ -1,0 +1,3 @@
+[INFO] -- Le log a été purgé --
+uée --
+[19:46] [INFO] -- Le tweet programmé à été posté --

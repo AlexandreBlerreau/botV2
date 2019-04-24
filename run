@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Programe de lancement du bot en cas de coupure de courant
+
+# Changement de répertoire
+cd ~/bot >/dev/null
+
+# lancement et initialisation du log
+nodejs index.js > log.txt &
