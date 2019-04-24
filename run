@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Programe de lancement du bot en cas de coupure de courant
+# Programe de lancement du bot en cas de coupure de courant sur raspberry
 
 # Changement de répertoire
 cd ~/bot >/dev/null
