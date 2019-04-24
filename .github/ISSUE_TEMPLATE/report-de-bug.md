@@ -1,8 +1,8 @@
 ---
-nom: Report de bug
-courte description: Reporter tous les bugs trouvés
+nom: 
+courte description: 
 catégorie: "[BUG]"
-résolut : X
+résolut : 
 
 ---
 
