@@ -19,7 +19,7 @@ Mise à jour du raspberry
 Sqlite3 
 - [x] + une table STATS avec PK(année,jour) pour stocker les données | livré le ??
 - [x] + une table par jour pour les logs son nom sera la date et heure comme PK| livré le ??
-- [ ] + une table pour stocker les charts avec le noSemaine comme PK| livré le ??
+- [x] + une table pour stocker les charts avec le noSemaine comme PK| livré le ??
 
 Chart.js
 - [ ] + génération semaine | livré le ??
