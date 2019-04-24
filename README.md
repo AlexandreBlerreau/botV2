@@ -1,27 +1,8 @@
-# botV2
+**Petit point au niveau de l'hygiène du repo:**
 
-- [x] + amélioration des tweets | livré le ??
-- [x] ~ correctif détection tweet (interruption entre stations)
-- [ ] + ajout d’un nouveau tweet review/semaine avec graph.| livré le ??
-- [x] + logs serveur à stocker sur sqlite3 | livré le ??
-- [x] + stockage des données sur sqlite3| livré le ??
-- [x] + ajout de la librairie chart.js| livré le ??
-- [ ] + ajout de /suggestion en dm| livré le ??
-- [ ] + ajout de /bug en dm| livré le ??
+-La branche master est la branche iso-prod du projet, pas de commit de dev ou de tests dessus.
+-La branche dev est la branche ou l'on merge nos propres branches et ou l'on teste avant la prod.
+-Pour les devs, preconisation d'une branche par feature, on ferme la branche quand c'est testé et livré.
 
-
-Mise à jour du raspberry 
-- [ ] + installation de 1To DD| livré le ??
-- [ ] + installation sqlite3| livré le ??
-- [ ] + installation d’une alimentation 5v >=1a/H
-- [ ] +- Shunter les usb avec la résistance ?
-
-Sqlite3 
-- [x] + une table STATS avec PK(année,jour) pour stocker les données | livré le ??
-- [x] + une table par jour pour les logs son nom sera la date et heure comme PK| livré le ??
-- [x] + une table pour stocker les charts avec le noSemaine comme PK| livré le ??
-
-Chart.js
-- [ ] + génération semaine | livré le ??
-- [ ] + stockage des charts sur sqlite3| livré le ??
-- [ ] ~ Line charts stepped (type graphique) : false | livré le ??
+**Norme de developpement**
+//todo
