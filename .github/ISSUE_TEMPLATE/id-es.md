@@ -1,9 +1,8 @@
 ---
-name: Idées
-about: Describe this issue template's purpose here.
-title: ''
-labels: enhancement
-assignees: ''
+Idée: 
+courte description: 
+labels: [IDEE]
+Intégrée:
 
 ---
 
