@@ -1,8 +1,8 @@
 ---
-Idée: 
-courte description: 
+Idée: un idée
+courte description: une description d'idée
 labels: [IDEE]
-Intégrée:
+Intégrée: oui/non
 
 ---
 
