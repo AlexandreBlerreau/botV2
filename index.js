@@ -13,7 +13,7 @@ let date;
 let Time = require('./Time');
 let sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
-let Graph = require('./Graph');
+let Graph = require('./graph');
 
 // liaison a l'api et l'appli bot
 let Twit = require('twit')
@@ -38,8 +38,8 @@ t.getProlongation();
 // a besoin de : npm install chartjs-node, npm install chart.js, npm install bluebird, npm install canvas, npm install debug, npm install jsdom, npm install stream-buffers
 // ==> installer les librairies sur ce lien ==> https://github.com/Automattic/node-canvas#installation  (pkg-config cairo pango libpng jpeg giflib librsvg)
 
-//let g = new Graph(2,3,1,0,7,0,1,"arrets");
-//g.generate();
+let g = new Graph(2,3,1,0,7,0,1,"arrets");
+g.generate();
 
 
 
