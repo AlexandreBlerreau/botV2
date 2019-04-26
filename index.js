@@ -13,6 +13,7 @@ let date;
 let Time = require('./Time');
 let sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
+let Graph = require('./Graph');
 
 // liaison a l'api et l'appli bot
 let Twit = require('twit')
@@ -36,68 +37,13 @@ t.getProlongation();
 // test d'un graph fonctionnel mais plante le programme
 // a besoin de : npm install chartjs-node, npm install chart.js, npm install bluebird, npm install canvas, npm install debug, npm install jsdom, npm install stream-buffers
 // ==> installer les librairies sur ce lien ==> https://github.com/Automattic/node-canvas#installation  (pkg-config cairo pango libpng jpeg giflib librsvg)
-/** var ChartjsNode = require('chartjs-node');
-let chartNode = new ChartjsNode(600, 600);
-let chartJsOptions = {
-        "type": "pie",
-        "data": {
-            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            "datasets": [{
-                "label": "# of Votes",
-                "data": [12, 19, 3, 5, 2, 3],
-                "backgroundColor": [
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(54, 162, 235, 0.2)",
-                    "rgba(255, 206, 86, 0.2)",
-                    "rgba(75, 192, 192, 0.2)",
-                    "rgba(153, 102, 255, 0.2)",
-                    "rgba(255, 159, 64, 0.2)"
-                ],
-                "borderColor": [
-                    "rgba(255,99,132,1)",
-                    "rgba(54, 162, 235, 1)",
-                    "rgba(255, 206, 86, 1)",
-                    "rgba(75, 192, 192, 1)",
-                    "rgba(153, 102, 255, 1)",
-                    "rgba(255, 159, 64, 1)"
-                ],
-                "borderWidth": 1
-            }]
-        },
-        "options": {
-            "scales": {
-                "yAxes": [{
-                    "ticks": {
-                        "beginAtZero": true
-                    }
-                }],
-                "xAxes":[0]
-            }
-        }
-    };
 
-    return chartNode.drawChart(chartJsOptions)
-        .then(() => {
-            return chartNode.getImageBuffer('image/png');
-        })
-        .then(buffer => {
-            Array.isArray(buffer) // => true
-            // as a stream
-            return chartNode.getImageStream('image/png');
-        })
-        .then(streamResult => {
-            // using the length property you can do things like
-            // directly upload the image to s3 by using the
-            // stream and length properties
-            streamResult.stream // => Stream object
-            streamResult.length // => Integer length of stream
-            // write to a file
-            return chartNode.writeImageToFile('image/png', './testimage.png');
-        })
-        .then(() => {
-            chartNode.destroy();
-        });
-**/
+//let g = new Graph(2,3,1,0,7,0,1,"arrets");
+//g.generate();
+
+
+
+let bd = new sqlite3.Database('./bdd',function(err){});
 // test d'un select
 
 bd.all('select * from LOGS where day="' + dateOfDayId + '"', [], (err,rows) => {
