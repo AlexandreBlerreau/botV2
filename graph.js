@@ -28,31 +28,10 @@ module.exports = class Graph {
 		let chartJsOptions = {
          type: 'line',
   data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    labels: ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"],
     datasets: [{ 
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Africa",
-        borderColor: "#3e95cd",
-        fill: false
-      }, { 
-        data: [282,350,411,502,635,809,947,1402,3700,5267],
-        label: "Asia",
-        borderColor: "#8e5ea2",
-        fill: false
-      }, { 
-        data: [168,170,178,190,203,276,408,547,675,734],
-        label: "Europe",
-        borderColor: "#3cba9f",
-        fill: false
-      }, { 
-        data: [40,20,10,16,24,38,74,167,508,784],
-        label: "Latin America",
-        borderColor: "#e8c3b9",
-        fill: false
-      }, { 
-        data: [6,3,2,2,7,26,82,172,312,433],
-        label: "North America",
-        borderColor: "#c45850",
+        data: [this.lundi,this.mardi,this.mercredi,this.jeudi,this.vendredi,this.samedi,this.dimanche],
+        borderColor: "yellow",
         fill: false
       }
     ]
@@ -60,7 +39,7 @@ module.exports = class Graph {
   options: {
     title: {
       display: true,
-      text: 'World population per region (in millions)'
+      text: this.label
     }
   }
 };
@@ -73,20 +52,20 @@ module.exports = class Graph {
         })
         .then(buffer => {
             Array.isArray(buffer) // => true
-            // as a stream
+            
             return chartNode.getImageStream('image/png');
         })
         .then(streamResult => {
-            // using the length property you can do things like
-            // directly upload the image to s3 by using the
-            // stream and length properties
-            streamResult.stream // => Stream object
-            streamResult.length // => Integer length of stream
-            // write to a file
+        
+           
+            // écriture de l'image
             return chartNode.writeImageToFile('image/png', './testimage.png');
         })
         .then(() => {
+ 
             chartNode.destroy();
+            // le return 1 permet de sortir de la génération et revenir a la boucle du bot
+            return 1;
         });
     }
 
