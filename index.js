@@ -76,8 +76,20 @@ function checkTime(){
       // écriture du log dans le fichier 
       fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Sauvegarde effectuée --\n",function(err){ if(err) console.log("erreur");});
 
+      if(d.getHours() == 00 && d.getMinutes() == 44 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday"){
+        // signifie qu'il est 00h44 est que nous sommes dimanche, il faut tweeter les stats
+
+       /**
+        sendGraph(t.getGraph());   --> tweetera le png généré par graph.js
+
+        **/
+
+      }
+
+
     
     if(d.getHours() == 00 && d.getMinutes() == 42){
+        // a 00h42 on tweet les stats de journée
     //sendTweet(t.Tweet());
         //t.Raz();
 
