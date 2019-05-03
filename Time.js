@@ -255,11 +255,18 @@ module.exports = class Time {
         let stop = " Pour " + this.nbArret + " intérruption(s)";
         let nbProlonge = "Nombre d'intéruption(s) prologée(s): " + this.prolongation + "";
         let pourcentage = this.AfficherPourcentage();
+        let dd = this.dateOfDay.getDate() -1;
+        let mm = this.dateOfDay.getMonth();
 
 		if(this.nbArret == 0){
 			// aucun incident dans la journée
 			return "Aucune intérruption de trafic pour ce jour.\n100% du service a été assuré !";
-		}else {
+		}
+		if( dd == 0 && mm == 5){
+			// signifie que nous somme le 1er mai, le métro est fermé
+			return "1er mai, aucun trafic à ce jour!"
+		}
+		else {
 			// il y a eu des incidents ... on les affiches
             return "Récapitulatif de la journée:\n " + tmpArret +"\n"+ stop + "\n " + nbProlonge + "\n" + pourcentage + "\n\n#iléviaMétro #Ligne1";
 		}
