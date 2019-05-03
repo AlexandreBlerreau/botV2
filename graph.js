@@ -25,6 +25,7 @@ module.exports = class Graph {
 		// réglage de la taille de l'image générée
 		let chartNode = new ChartjsNode(600, 600);
 
+
 		let chartJsOptions = {
          type: 'line',
   data: {
@@ -37,10 +38,16 @@ module.exports = class Graph {
     ]
   },
   options: {
+
     title: {
       display: true,
       text: this.label
-    }
+    },  
+     legend: {
+            display: false
+    },
+
+
   }
 };
 

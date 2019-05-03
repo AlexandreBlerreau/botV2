@@ -38,7 +38,7 @@ t.getProlongation();
 // a besoin de : npm install chartjs-node, npm install chart.js, npm install bluebird, npm install canvas, npm install debug, npm install jsdom, npm install stream-buffers
 // ==> installer les librairies sur ce lien ==> https://github.com/Automattic/node-canvas#installation  (pkg-config cairo pango libpng jpeg giflib librsvg)
 
-let g = new Graph(2,3,1,0,7,0,1,"Review des arrêts de cette semaine");
+let g = new Graph(2,3,1,0,0,3,1,"Review des arrêts de cette semaine");
 g.generate();
 
 
