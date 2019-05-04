@@ -21,6 +21,7 @@ module.exports = class Time {
 
 		// permet l'écriture du fichier log en local
         this.fs = require('fs');
+        this.gp = require('./graph');
 
 
         // par defaut a 0 sauf si des données sont présentes en base
@@ -293,5 +294,19 @@ module.exports = class Time {
         this.fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [WARN] -- Remise à 0 complète, fin de service! --\n",function(err){ if(err) console.log("erreur");});
         
     
+	}
+
+	getGraph(libelle){
+	   // genere a partir de jour ou elle est appellée n-7 
+
+	   //préparation des accès en base...
+	   let sqlite3 = require('sqlite3').verbose();
+	   let db = new sqlite3.Database('./bdd',function(err){});
+
+	   // Quelle jour somme nous ?
+
+	   let dd = dateOfDay.getDate() -1;
+	   let mm = dateOfDay.getMonth() +1;
+	   let yyyy = dateOfDay.getFullYear();
 	}
 }

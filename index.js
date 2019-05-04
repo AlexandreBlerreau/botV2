@@ -80,7 +80,8 @@ function checkTime(){
         // signifie qu'il est 00h44 est que nous sommes dimanche, il faut tweeter les stats
 
        /**
-        sendGraph(t.getGraph());   --> tweetera le png généré par graph.js
+        sendGraph(t.getGraph(libelle));   --> tweetera le png généré par graph.js
+                                              Le param libelle sera la titre du graph
 
         **/
 
