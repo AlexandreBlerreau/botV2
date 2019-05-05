@@ -21,7 +21,6 @@ module.exports = class Time {
 
 		// permet l'écriture du fichier log en local
         this.fs = require('fs');
-        this.gp = require('./graph');
 
 
         // par defaut a 0 sauf si des données sont présentes en base
@@ -296,17 +295,74 @@ module.exports = class Time {
     
 	}
 
-	getGraph(libelle){
+	getGraphArret(libelle){
 	   // genere a partir de jour ou elle est appellée n-7 
 
 	   //préparation des accès en base...
 	   let sqlite3 = require('sqlite3').verbose();
 	   let db = new sqlite3.Database('./bdd',function(err){});
 
-	   // Quelle jour somme nous ?
 
-	   let dd = dateOfDay.getDate() -1;
-	   let mm = dateOfDay.getMonth() +1;
-	   let yyyy = dateOfDay.getFullYear();
+
+	  db.all('select nbArret as valeur, jour as j from stats order by rowid desc limit 7;', [], function(err,rows){
+	  	if(err){
+	  		console.log(err);
+	  	}
+
+	  	if(rows){
+	  		// la requête récupére les 7 dernier enregistrements trié dans l'ordre du moins recent au dernier.
+	  		
+	  		// generation du graph
+
+	  		//include
+			let gp = require('./graph');
+
+			// instanciation
+	  		let g = new gp(rows[6].valeur,rows[5].valeur,rows[4].valeur,rows[3].valeur,rows[2].valeur,rows[1].valeur,rows[0].valeur,libelle);
+
+	  		// generation le graph est dispo a la racine du dossier 
+	  		g.generate();
+
+	  	}
+
+	  });
+
+
+	}
+
+
+	getGraphMinute(libelle){
+	   // genere a partir de jour ou elle est appellée n-7 
+
+	   //préparation des accès en base...
+	   let sqlite3 = require('sqlite3').verbose();
+	   let db = new sqlite3.Database('./bdd',function(err){});
+
+
+
+	  db.all('select tmpInterruption as valeur, jour as j from stats order by rowid desc limit 7;', [], function(err,rows){
+	  	if(err){
+	  		console.log(err);
+	  	}
+
+	  	if(rows){
+	  		// la requête récupére les 7 dernier enregistrements 
+	  		
+	  		// generation du graph
+
+	  		//include
+			let gp = require('./graph');
+
+			// instanciation
+	  		let g = new gp(rows[6].valeur,rows[5].valeur,rows[4].valeur,rows[3].valeur,rows[2].valeur,rows[1].valeur,rows[0].valeur,libelle);
+
+	  		// generation le graph est dispo a la racine du dossier 
+	  		g.generate();
+
+	  	}
+
+	  });
+
+
 	}
 }

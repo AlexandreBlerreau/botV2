@@ -12,6 +12,7 @@ let date;
 // Import
 let Time = require('./Time');
 let sqlite3 = require('sqlite3').verbose();
+let bd = new sqlite3.Database('./bdd',function(err){});
 const fs = require('fs');
 let Graph = require('./graph');
 
@@ -34,29 +35,11 @@ t.getTmpArret();
 t.getProlongation();
 
 
+
+
 // test d'un graph fonctionnel mais plante le programme
 // a besoin de : npm install chartjs-node, npm install chart.js, npm install bluebird, npm install canvas, npm install debug, npm install jsdom, npm install stream-buffers
 // ==> installer les librairies sur ce lien ==> https://github.com/Automattic/node-canvas#installation  (pkg-config cairo pango libpng jpeg giflib librsvg)
-
-let g = new Graph(2,3,1,0,0,3,1,"Review des arrêts de cette semaine");
-g.generate();
-
-
-
-let bd = new sqlite3.Database('./bdd',function(err){});
-// test d'un select
-
-bd.all('select * from LOGS where day="' + dateOfDayId + '"', [], (err,rows) => {
-    if(err){
-      console.log("Erreur dans l'odre select");
-    }
-    if(rows){
-      rows.forEach((row) => {
-        console.log(row);
-      })
-    }
-})
-
 
 
 
@@ -76,20 +59,20 @@ function checkTime(){
       // écriture du log dans le fichier 
       fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Sauvegarde effectuée --\n",function(err){ if(err) console.log("erreur");});
 
-      if(d.getHours() == 00 && d.getMinutes() == 44 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday"){
+      if(d.getHours() == 20 && d.getMinutes() == 05 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday"){
+        
         // signifie qu'il est 00h44 est que nous sommes dimanche, il faut tweeter les stats
 
-       /**
-        sendGraph(t.getGraph(libelle));   --> tweetera le png généré par graph.js
-                                              Le param libelle sera la titre du graph
+       
+        sendGraph();  
 
-        **/
+        
 
       }
 
 
     
-    if(d.getHours() == 00 && d.getMinutes() == 42){
+    if(d.getHours() == 20 && d.getMinutes() == 03){
         // a 00h42 on tweet les stats de journée
     //sendTweet(t.Tweet());
         //t.Raz();
@@ -106,7 +89,7 @@ function checkTime(){
           // on écris les logs de la journée écoulée en base cela dois être fait obligatoirement dans le readFile sinon lecture = undefined
          let dateOfDayIdTmp = `${dateOfDay.getDate() -1}/${dateOfDay.getMonth() +1}/${dateOfDay.getFullYear()}`;
         bd.run('update LOGS set logger = logger ||"' + lecture + '" where day="' + dateOfDayIdTmp + '"',function(err){ console.log("??" + err);});
-    
+       t.getGraphMinute("Interruptions cette semaine");
        
 });
    
@@ -149,6 +132,37 @@ function sendTweet(Atweet) {
            fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Le tweet programmé à été posté --\n",function(err){ if(err) console.log("erreur");});
 }
 
+
+function sendGraph(){
+  var b64content1 = fs.readFileSync("./graph-Interruptions cette semaine.png", { encoding: 'base64' });
+
+T.post('media/upload', { media_data: b64content1 }, function (err, data, response) { 
+
+  if (err){
+      console.log(err);
+    }
+    else{
+      console.log('Image uploaded!');
+      console.log('Now tweeting it...');
+
+      T.post('statuses/update', {
+        media_ids: new Array(data.media_id_string)
+      },
+        function(err, data, response) {
+          if (err){
+            console.log(err);
+          }
+          else{
+            console.log('Posted an image!');
+          }
+        }
+      );
+    }
+  });
+
+
+
+}
 
 // comptes a écouter (@iléviametro)
 const users = ["2373894229"];

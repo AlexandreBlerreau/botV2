@@ -33,12 +33,13 @@ module.exports = class Graph {
     datasets: [{ 
         data: [this.lundi,this.mardi,this.mercredi,this.jeudi,this.vendredi,this.samedi,this.dimanche],
         borderColor: "yellow",
-        fill: false
+        fill: false,
+        steppedLine: false,
+        backgroundColor : "black"
       }
     ]
   },
-  options: {
-
+  options: { 
     title: {
       display: true,
       text: this.label
@@ -66,7 +67,7 @@ module.exports = class Graph {
         
            
             // écriture de l'image
-            return chartNode.writeImageToFile('image/png', './testimage.png');
+            return chartNode.writeImageToFile('image/png', './graph-' + this.label + '.png');
         })
         .then(() => {
  
