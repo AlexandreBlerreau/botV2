@@ -123,7 +123,7 @@ function sendTweet(Atweet) {
     let mm = d.getMonth() +1; // +1 janvier = 0
     let yyyy = d.getFullYear();
 
-    if( dd == 0){ dd ++}; // Patch le bug du premier jour du mois à 0
+    
 
     let tweet = { status:'[ ' + dd+'/'+mm+'/'+yyyy+' ]\n' + Atweet };
     T.post('statuses/update', tweet, tweeted);
