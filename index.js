@@ -207,8 +207,8 @@ const users = ["2373894229"];
 let stream = T.stream('statuses/filter', {follow: users})
 
 
-// Laisser l'écoute des tweets en commentaire en mode developpeur pour ne pas intéferer avec le bot qui tourne sur le raspberry
-/** écoute des tweet
+
+// écoute des tweet
 stream.on('tweet', function (tweet) {
           if (users.indexOf(tweet.user.id_str) > -1) {
           
@@ -229,6 +229,8 @@ stream.on('tweet', function (tweet) {
             t.Reprise(date);
           }
           }
-          })**/
+          })
+ 
+
 
 
