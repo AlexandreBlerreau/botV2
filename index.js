@@ -36,10 +36,10 @@ t.getProlongation();
 
 
 
-
 // test d'un graph fonctionnel mais plante le programme
 // a besoin de : npm install chartjs-node, npm install chart.js, npm install bluebird, npm install canvas, npm install debug, npm install jsdom, npm install stream-buffers
 // ==> installer les librairies sur ce lien ==> https://github.com/Automattic/node-canvas#installation  (pkg-config cairo pango libpng jpeg giflib librsvg)
+t.getGraphMinute();
 
 
 
@@ -49,6 +49,7 @@ setInterval(checkTime,1000*10);
 
 
 // fonction qui vérifie si c'est l'heure de tweeter
+var pass = false;
 function checkTime(){
  
     let d = new Date();
@@ -59,20 +60,25 @@ function checkTime(){
       // écriture du log dans le fichier 
       fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Sauvegarde effectuée --\n",function(err){ if(err) console.log("erreur");});
 
-      if(d.getHours() == 20 && d.getMinutes() == 05 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday"){
+      if(d.getHours() == 00 && d.getMinutes() == 44 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday" && pass == false){
         
         // signifie qu'il est 00h44 est que nous sommes dimanche, il faut tweeter les stats
-
+        // la variable pass sert a ne pas tweeter deux fois les graph
+        pass = true;
        
         sendGraph();  
 
         
 
       }
+      if(d.getHours() == 00 && d.getMinutes() == 45 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday"){
+        // raz de pass
+        pass = false;
+      }
 
 
     
-    if(d.getHours() == 20 && d.getMinutes() == 03){
+    if(d.getHours() == 00 && d.getMinutes() == 42){
         // a 00h42 on tweet les stats de journée
     //sendTweet(t.Tweet());
         //t.Raz();
@@ -89,7 +95,10 @@ function checkTime(){
           // on écris les logs de la journée écoulée en base cela dois être fait obligatoirement dans le readFile sinon lecture = undefined
          let dateOfDayIdTmp = `${dateOfDay.getDate() -1}/${dateOfDay.getMonth() +1}/${dateOfDay.getFullYear()}`;
         bd.run('update LOGS set logger = logger ||"' + lecture + '" where day="' + dateOfDayIdTmp + '"',function(err){ console.log("??" + err);});
+
+        // generation des graphs au passage puisque ca prend un peu de temps
        t.getGraphMinute("Interruptions cette semaine");
+       t.getGraphArret("Arrêts cette semaine");
        
 });
    
@@ -132,18 +141,18 @@ function sendTweet(Atweet) {
            fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Le tweet programmé à été posté --\n",function(err){ if(err) console.log("erreur");});
 }
 
-
+// fonction qui twittera les graph
 function sendGraph(){
-  var b64content1 = fs.readFileSync("./graph-Interruptions cette semaine.png", { encoding: 'base64' });
+  var b64content1 = fs.readFileSync("./graph-Interruptions cette semaine.jpg", { encoding: 'base64' });
+  var b64content2 = fs.readFileSync("./graph-Arrêts cette semaine.jpg", { encoding: 'base64' });
 
+// upload et tweet du graph minutes
 T.post('media/upload', { media_data: b64content1 }, function (err, data, response) { 
 
   if (err){
       console.log(err);
     }
     else{
-      console.log('Image uploaded!');
-      console.log('Now tweeting it...');
 
       T.post('statuses/update', {
         media_ids: new Array(data.media_id_string)
@@ -153,12 +162,39 @@ T.post('media/upload', { media_data: b64content1 }, function (err, data, respons
             console.log(err);
           }
           else{
-            console.log('Posted an image!');
+           // écriture du log dans le fichier 
+           fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Le graph1 programmé à été posté --\n",function(err){ if(err) console.log("erreur");});
           }
         }
       );
     }
   });
+
+
+// upload et tweet du graph arrets
+T.post('media/upload', { media_data: b64content2 }, function (err, data, response) { 
+
+  if (err){
+      console.log(err);
+    }
+    else{
+
+      T.post('statuses/update', {
+        media_ids: new Array(data.media_id_string)
+      },
+        function(err, data, response) {
+          if (err){
+            console.log(err);
+          }
+          else{
+           // écriture du log dans le fichier 
+           fs.appendFile("./log.txt","[" + d.getHours() + ":" + d.getMinutes() +"] [INFO] -- Le graph2 programmé à été posté --\n",function(err){ if(err) console.log("erreur");});
+          }
+        }
+      );
+    }
+  });
+
 
 
 

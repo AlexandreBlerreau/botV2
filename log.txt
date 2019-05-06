@@ -1,10 +1,8 @@
 [INFO] -- Le log a été purgé --
-ée --
-[20:4] [INFO] -- Sauvegarde effectuée --
-[20:4] [INFO] -- Sauvegarde effectuée --
-[20:4] [INFO] -- Sauvegarde effectuée --
-[20:4] [INFO] -- Sauvegarde effectuée --
-[20:4] [INFO] -- Sauvegarde effectuée --
-[20:4] [INFO] -- Sauvegarde effectuée --
-[20:5] [INFO] -- Sauvegarde effectuée --
-[20:5] [INFO] -- Sauvegarde effectuée --
+uée --
+[18:13] [INFO] -- Sauvegarde effectuée --
+[18:13] [INFO] -- Sauvegarde effectuée --
+[18:13] [INFO] -- Sauvegarde effectuée --
+[18:13] [INFO] -- Sauvegarde effectuée --
+[18:13] [INFO] -- Sauvegarde effectuée --
+[18:13] [INFO] -- Sauvegarde effectuée --

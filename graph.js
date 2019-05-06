@@ -14,16 +14,33 @@ module.exports = class Graph {
 
 		// label est juste la description du graph (nbArret,MinutesTotales....)
 		this.label = label;
+    this.plugin = { beforeDraw: function(chartInstance) {
+    var ctx = chartInstance.chart.ctx;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
+  }};
 
 	}
 
-
+// generation du graph et export un jgp
 	generate(){
 		// import
 		let ChartjsNode = require('chartjs-node');
-
+    let bg = require('chartjs-plugin-background');
 		// réglage de la taille de l'image générée
-		let chartNode = new ChartjsNode(600, 600);
+		let chartNode = new ChartjsNode(800, 600);
+
+
+    chartNode.on('beforeDraw', function(Chart){
+
+      Chart.plugins.register({
+  beforeDraw: function(chartInstance) {
+    var ctx = chartInstance.chart.ctx;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
+  }
+});
+    });
 
 
 		let chartJsOptions = {
@@ -35,18 +52,45 @@ module.exports = class Graph {
         borderColor: "yellow",
         fill: false,
         steppedLine: false,
-        backgroundColor : "black"
+        backgroundColor : "white"
       }
     ]
   },
   options: { 
     title: {
       display: true,
-      text: this.label
+      text: this.label,
+      fontColor: 'black',
+      fontStyle: "bold"
     },  
      legend: {
             display: false
     },
+    scales: {
+      xAxes: [{
+       ticks: {
+                    fontColor: 'black',
+                    fontStyle: "bold"
+                },
+        
+        gridLines: {
+          color: 'black',
+          lineWidth: 1,
+          
+        }
+      }],
+      yAxes: [{
+       ticks: {
+                    fontColor: 'black',
+                    fontStyle: "bold"
+                },
+        gridLines: {
+          color: 'black',
+          lineWidth: 1
+        }
+      }]
+    },
+    
 
 
   }
@@ -67,7 +111,7 @@ module.exports = class Graph {
         
            
             // écriture de l'image
-            return chartNode.writeImageToFile('image/png', './graph-' + this.label + '.png');
+            return chartNode.writeImageToFile('image/jpg', './graph-' + this.label + '.jpg');
         })
         .then(() => {
  

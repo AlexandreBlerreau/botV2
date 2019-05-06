@@ -353,6 +353,9 @@ module.exports = class Time {
 	  		//include
 			let gp = require('./graph');
 
+
+
+
 			// instanciation
 	  		let g = new gp(rows[6].valeur,rows[5].valeur,rows[4].valeur,rows[3].valeur,rows[2].valeur,rows[1].valeur,rows[0].valeur,libelle);
 
