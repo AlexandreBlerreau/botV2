@@ -71,7 +71,7 @@ function checkTime(){
         
 
       }
-      if(d.getHours() == 00 && d.getMinutes() == 45 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Sunday"){
+      if(d.getHours() == 00 && d.getMinutes() == 45 && d.toLocaleString('en-us', {  weekday: 'long' }) == "Monday"){
         // raz de pass
         pass = false;
       }
@@ -120,6 +120,13 @@ function checkTime(){
 function sendTweet(Atweet) {
     let d = new Date();
     let dd = d.getDate() -1; // -1 Le tweet concerne la journée dernière et le tweet est programmé pour 00h42
+
+    // patch du bug jour 0
+    if(dd == 0){
+      dd = t.getLastDayOfMounth(d.getMonth() +1);
+    }
+    // -----
+
     let mm = d.getMonth() +1; // +1 janvier = 0
     let yyyy = d.getFullYear();
 
