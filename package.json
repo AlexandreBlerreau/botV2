@@ -6,7 +6,7 @@
   "dependencies": {
     "bluebird": "^3.5.4",
     "canvas": "^2.4.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "chartjs-node": "^1.7.1",
     "debug": "^4.1.1",
     "fs": "0.0.1-security",
